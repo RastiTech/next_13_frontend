@@ -1,0 +1,23 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  [data-nextjs-scroll-focus-boundary] {
+    width: 100%;
+  }
+}
+
+.main-layout-children-wrapper {
+  min-height: calc(100% - 120px);
+}
+
+.main-layout-header,
+.main-layout-footer {
+  height: 60px;
+}
+
+.main-layout-footer {
+  height: 160px;
+  align-items: flex-start;
+}

@@ -1,57 +1,73 @@
-import Image from 'next/image'
-import styles from './page.module.css'
+import { use } from "react";
+import { loginUser } from "../api/user";
 
-export default function Home() {
+const getUsers = async () => {
+  const users = await fetch("https://jsonplaceholder.typicode.com/users", {
+    cache: "no-store",
+  });
+  // delay by 1 minute
+  // await new Promise((resolve) => setTimeout(resolve, 60000));
+
+  return users.json();
+};
+
+const Home = () => {
+  const users = use(getUsers());
+  use(
+    loginUser({
+      bodyOrQuery: {
+        username: "test",
+        whatever: ["salut", "palut"],
+      },
+      options: {
+        cache: "no-store",
+      },
+    })
+  );
   return (
-    <div className={styles.container}>
-      <main className={styles.main}>
-        <h1 className={styles.title}>
-          Welcome to <a href="https://nextjs.org">Next.js 13!</a>
-        </h1>
-
-        <p className={styles.description}>
-          Get started by editing{' '}
-          <code className={styles.code}>app/page.tsx</code>
-        </p>
-
-        <div className={styles.grid}>
-          <a href="https://beta.nextjs.org/docs" className={styles.card}>
-            <h2>Documentation &rarr;</h2>
-            <p>Find in-depth information about Next.js 13</p>
-          </a>
-
-          <a
-            href="https://github.com/vercel/next.js/tree/canary/examples"
-            className={styles.card}
+    <div className="flex flex-1 flex-wrap w-full justify-around">
+      {users.map((u: any) => {
+        return (
+          <div
+            key={u.id}
+            className="m-2 bg-gray-500 rounded-lg w-80 flex flex-col items-center p-1 gap-1"
           >
-            <h2>Examples &rarr;</h2>
-            <p>Explore the Next.js 13 playground.</p>
-          </a>
+            <h2 className="text-lg font-bold bg-white w-full text-center rounded-t-lg">
+              {u.name}
+            </h2>
+            <div className="px-2 py-2 bg-white w-full flex flex-col items-center rounded-b-lg">
+              <div className="text-lg font-base">Details:</div>
+              <div className="w-full flex flex-col p-2 gap-2">
+                <div className="flex">
+                  <div className="text-base font-light">username:</div>
+                  <div className="text-base font-base ml-2">{u.username}</div>
+                </div>
 
-          <a
-            href="https://vercel.com/templates/next.js/app-directory?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-            className={styles.card}
-          >
-            <h2>Deploy &rarr;</h2>
-            <p>Deploy your Next.js site to a public URL with Vercel.</p>
-          </a>
-        </div>
-      </main>
+                <div className="flex">
+                  <div className="text-base font-light">email:</div>
+                  <div className="text-base font-base ml-2">{u.email}</div>
+                </div>
 
-      <footer className={styles.footer}>
-        <a
-          href="https://vercel.com?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Powered by{' '}
-          <span className={styles.logo}>
-            <Image src="/vercel.svg" alt="Vercel Logo" width={72} height={16} />
-          </span>
-        </a>
-      </footer>
+                <div className="flex">
+                  <div className="text-base font-light">city:</div>
+                  <div className="text-base font-base ml-2">
+                    {u.address?.city}
+                  </div>
+                </div>
+
+                <div className="flex">
+                  <div className="text-base font-light">phone:</div>
+                  <div className="text-base font-base ml-2">{u.phone}</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        );
+      })}
+      {new Array(10).fill(0).map((_, i) => {
+        return <div key={i} className={"m-2 w-80 h-0"}></div>;
+      })}
     </div>
-  )
-}
+  );
+};
+export default Home;
