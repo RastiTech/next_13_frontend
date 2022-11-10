@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { use } from "react";
+import Header from "../components/primitives/main-header";
 import "./output.css";
 
 const getUser = async (id: number) => {
@@ -24,14 +25,7 @@ export default function RootLayout({
         <link rel="icon" href="/favicon.ico" />
       </head>
       <body className="w-full h-full">
-        <nav className="flex justify-between items-center px-6 main-layout-header sticky top-0">
-          <Link href="/" className="cursor-pointer">
-            <div>Logo</div>
-          </Link>
-          <Link href="/profile" className="cursor-pointer">
-            {user.name}
-          </Link>
-        </nav>
+        <Header />
         <div className="main-layout-children-wrapper flex">{children}</div>
         <nav className="flex justify-between items-center px-6 main-layout-footer">
           <Link href="/" className="cursor-pointer">
