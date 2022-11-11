@@ -8,8 +8,12 @@
   }
 }
 
-body {
+/* body {
   padding-top: 60px;
+} */
+
+.header-mask {
+  height: 60px;
 }
 
 .main-layout-children-wrapper {
