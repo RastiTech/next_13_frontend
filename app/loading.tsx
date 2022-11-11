@@ -1,20 +1,8 @@
-'use client';
-
-import { useEffect } from 'react';
-
 const Loading = () => {
-  useEffect(() => {
-    // Applying on mount
-    document.body.style.overflow = 'hidden';
-    // Applying on unmount
-    return () => {
-      document.body.style.overflow = 'visible';
-    };
-  }, []);
   return (
     <>
       <div className="w-full h-16" />
-      <div className="basic-page-style flex flex-1 h-full flex-wrap w-full justify-center items-center">
+      <div className="basic-page-style flex justify-center items-center">
         <div role="status">
           <svg
             aria-hidden="true"
