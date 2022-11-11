@@ -25,9 +25,9 @@ const Home = () => {
     })
   );
   return (
-    <>
+    <div className="basic-page-style">
       <div className="w-full h-16" />
-      <div className="basic-page-style flex flex-wrap h-full w-full justify-around">
+      <div className="flex flex-wrap h-full w-full justify-around">
         {users.map((u: any) => {
           return (
             <div
@@ -70,7 +70,7 @@ const Home = () => {
           return <div key={i} className={'mx-2 px-1 w-80 h-0'}></div>;
         })}
       </div>
-    </>
+    </div>
   );
 };
 export default Home;
