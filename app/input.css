@@ -8,13 +8,37 @@
   }
 }
 
+body {
+  padding-top: 60px;
+}
+
 .main-layout-children-wrapper {
-  min-height: calc(100% - 120px);
+  min-height: calc(100% - 60px);
+}
+.main-layout-children-content {
+  max-width: 1600px;
+  width: 100%;
+}
+
+.main-layout-header-content,
+.main-layout-footer-content {
+  max-width: 1600px;
+  width: 100%;
 }
 
 .main-layout-header,
 .main-layout-footer {
   height: 60px;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.main-layout-footer-content-heading {
+  min-height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }
 
 .main-layout-footer {

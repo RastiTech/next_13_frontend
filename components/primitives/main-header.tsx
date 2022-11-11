@@ -11,13 +11,15 @@ const getUser = async (id: number) => {
 const Header = () => {
   const user = use(getUser(1));
   return (
-    <nav className="flex justify-between items-center px-6 main-layout-header sticky top-0 bg-teal-900 text-white">
-      <Link href="/" className="cursor-pointer">
-        <div>Logo</div>
-      </Link>
-      <Link href="/profile" className="cursor-pointer">
-        {user.name}
-      </Link>
+    <nav className="w-full main-layout-header bg-purple-800 fixed top-0">
+      <div className="main-layout-header-content flex justify-between items-center px-6 text-white">
+        <Link href="/" className="cursor-pointer">
+          <div>Logo</div>
+        </Link>
+        <Link href="/profile" className="cursor-pointer">
+          {user.name}
+        </Link>
+      </div>
     </nav>
   );
 };

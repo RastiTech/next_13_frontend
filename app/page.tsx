@@ -30,12 +30,12 @@ const Home = () => {
         return (
           <div
             key={u.id}
-            className="m-2 bg-gray-500 rounded-lg w-80 flex flex-col items-center p-1 gap-1"
+            className="m-2 bg-purple-900 rounded-lg w-80 flex flex-col items-center p-1 gap-1"
           >
-            <h2 className="text-lg font-bold bg-white w-full text-center rounded-t-lg">
+            <h2 className="text-lg font-bold bg-green-500 text-white w-full text-center rounded-t-lg">
               {u.name}
             </h2>
-            <div className="px-2 py-2 bg-white w-full flex flex-col items-center rounded-b-lg">
+            <div className="px-2 py-2 bg-orange-400 text-white w-full flex flex-col items-center rounded-b-lg">
               <div className="text-lg font-base">Details:</div>
               <div className="w-full flex flex-col p-2 gap-2">
                 <div className="flex">
@@ -65,7 +65,7 @@ const Home = () => {
         );
       })}
       {new Array(10).fill(0).map((_, i) => {
-        return <div key={i} className={"m-2 w-80 h-0"}></div>;
+        return <div key={i} className={"mx-2 px-1 w-80 h-0"}></div>;
       })}
     </div>
   );
