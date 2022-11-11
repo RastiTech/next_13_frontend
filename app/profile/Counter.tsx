@@ -41,7 +41,7 @@ const Counter = (props: { user: any }) => {
         <div className="text-xl font-bold text-gray-800 mr-6">{user.name}</div>
         <div className="text-xl font-bold text-gray-800 mr-6">{count}</div>
         <button
-          className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+          className="bg-purple-800 hover:bg-purple-900 text-white font-bold py-2 px-4 rounded"
           onClick={handleClick}
         >
           Click me
