@@ -788,8 +788,12 @@ video {
   color: rgb(31 41 55 / var(--tw-text-opacity));
 }
 
-body {
+/* body {
   padding-top: 60px;
+} */
+
+.header-mask {
+  height: 60px;
 }
 
 .main-layout-children-wrapper {
