@@ -3,17 +3,18 @@ export interface createFetchRequestOptions {
   url: string;
   headers?: Headers;
   options?: {
-    [key: string]: string;
+    [key: string]: any;
   };
   bodyOrQuery?: {
     [key: string]: any;
   };
+  contentType?: string;
 }
 
 export interface getRequestOptions {
   headers?: Headers;
   options?: {
-    [key: string]: string;
+    [key: string]: any;
   };
   bodyOrQuery?: {
     [key: string]: string | string[];
