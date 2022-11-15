@@ -1,25 +1,39 @@
-import { cookies } from "next/headers";
 import { createFetchRequestOptions } from "../interfaces/api";
 import config from "../utils/config";
 
-const createFetchRequest = async (options: createFetchRequestOptions) => {
-  const { method, headers, options: optionsObject, url, bodyOrQuery } = options;
-  const nextCookies = cookies();
-
-  const token = nextCookies.get(
-    (process.env.NEXT_PUBLIC_COOKIE_NAME as string) || "qid"
-  );
+const createFetchRequest = async (inputs: createFetchRequestOptions) => {
+  const {
+    method,
+    headers,
+    options: optionsObject,
+    url,
+    bodyOrQuery,
+    contentType,
+  } = inputs;
 
   const fetchOptions: RequestInit = {
     credentials: "include",
     method,
   };
 
-  if (token) {
-    fetchOptions.headers = {
-      ...new Headers(headers),
-      Cookie: "qid=" + encodeURIComponent(token?.value || ""),
-    };
+  fetchOptions.headers = {
+    ...new Headers(headers),
+  };
+
+  if (typeof window === "undefined") {
+    const { cookies } = await import("next/headers");
+    const nextCookies = cookies();
+
+    const token = nextCookies.get(
+      (process.env.NEXT_PUBLIC_COOKIE_NAME as string) || "qid"
+    );
+
+    if (token) {
+      fetchOptions.headers = {
+        ...fetchOptions.headers,
+        cookie: "qid=" + encodeURIComponent(token?.value || ""),
+      };
+    }
   }
 
   let requestUrl = config.api_path + url;
@@ -44,8 +58,14 @@ const createFetchRequest = async (options: createFetchRequestOptions) => {
 
   try {
     const res = await fetch(requestUrl, {
-      ...fetchOptions,
       ...optionsObject,
+      ...fetchOptions,
+
+      headers: {
+        ...optionsObject?.headers,
+        ...fetchOptions.headers,
+        "content-type": contentType || "application/json",
+      },
     });
 
     const data = res.json();
